@@ -1,4 +1,4 @@
-CREATE TABLE users (
+CREATE TABLE IF NOT EXISTS users (
     id SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
@@ -7,8 +7,7 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE projects (
+CREATE TABLE IF NOT EXISTS projects (
     id SERIAL PRIMARY KEY,
     title VARCHAR(200) NOT NULL,
     description VARCHAR(1000),
@@ -18,7 +17,7 @@ CREATE TABLE projects (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE bids (
+CREATE TABLE IF NOT EXISTS bids (
     id SERIAL PRIMARY KEY,
     project_id INTEGER REFERENCES projects(id) ON DELETE CASCADE,
     freelancer_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
@@ -27,8 +26,7 @@ CREATE TABLE bids (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
-
-CREATE TABLE contracts (
+CREATE TABLE IF NOT EXISTS contracts (
     id SERIAL PRIMARY KEY,
     project_id INTEGER UNIQUE REFERENCES projects(id),
     freelancer_id INTEGER REFERENCES users(id),
